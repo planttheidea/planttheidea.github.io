@@ -1,0 +1,49 @@
+@import '../../global/variables.scss';
+
+.navItemWithDropdown {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.menuDropdown {
+  background-color: #fff;
+  box-shadow: 0 0 5px #ccc;
+  display: none;
+  left: 0;
+  position: absolute;
+  top: 100%;
+}
+
+.menuDropdownActive {
+  composes: menuDropdown;
+
+  display: block;
+}
+
+.menuDropdown :global(.nav-item) {
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.menuIcon {
+  margin-right: 5px;
+}
+
+.linkContainer {
+  overflow: visible;
+}
+
+.logo {
+  font-family: 'TypoPRO Aleo', serif;
+  font-size: 40px;
+  font-weight: bold;
+  text-shadow: 5px 5px 5px #ededee;
+}
+
+.logo > a,
+.logo > a:hover {
+  color: $pti-green;
+}

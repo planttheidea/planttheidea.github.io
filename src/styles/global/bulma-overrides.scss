@@ -1,0 +1,10 @@
+@import './variables';
+
+a.nav-item.is-tab.is-active {
+  border-bottom-color: $pti-green;
+  color: $pti-green;
+}
+
+a.nav-item.is-tab:hover {
+  border-bottom-color: $pti-green;
+}

@@ -1,0 +1,22 @@
+.library {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.libraryName {
+  flex-basis: 120px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 15px;
+}
+
+.libraryDescription {
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+  min-width: 0;
+  padding: 15px;
+}
