@@ -3,6 +3,7 @@ import debounce from 'lodash/debounce';
 import moize from 'moize';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
+import Loader from 'react-loader';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
@@ -10,7 +11,9 @@ import styled from 'styled-components';
 import * as repositoriesActions from 'actions/repositoriesActions';
 
 // components
+import Loading from 'components/Loading';
 import RepositoryCard from 'components/RepositoryList/RepositoryCard';
+import RepositoryReadmeDawer from 'components/RepositoryList/RepositoryReadmeDrawer';
 
 // utils
 import {getFilteredRepositories} from 'utils/repositories';
@@ -18,10 +21,14 @@ import {getFilteredRepositories} from 'utils/repositories';
 export const DEBOUNCE_INPUT_TIMING = 100;
 
 export const Container = styled.section`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
   height: 100%;
+
+  & > .loadedContent {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+  }
 `;
 
 export const SearchContainer = styled.div`
@@ -55,6 +62,8 @@ export const List = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  margin: 0 auto;
+  max-width: 1800px;
   padding-left: 15px;
 `;
 
@@ -145,10 +154,12 @@ export const createOnChangeInput = (instance) => {
  *
  * @returns {Object} the state to map to props
  */
-export const mapStateToProps = ({repositories: repos}) => {
+export const mapStateToProps = ({repositories: repos, repository}) => {
   const {isLoadingRepositories, repositories, repositoriesError} = repos;
+  const {projectName: activeName} = repository;
 
   return {
+    activeName,
     isLoadingRepositories,
     repositories,
     repositoriesError
@@ -163,6 +174,7 @@ export class RepositoryList extends PureComponent {
   static displayName = 'RepositoryList';
 
   static propTypes = {
+    activeName: PropTypes.string,
     className: PropTypes.string,
     getRepositories: PropTypes.func.isRequired,
     isLoadingRepositories: PropTypes.bool.isRequired,
@@ -182,32 +194,40 @@ export class RepositoryList extends PureComponent {
   onChangeInput = createOnChangeInput(this);
 
   render() {
-    const {className, isLoadingRepositories, repositories, repositoriesError} = this.props;
+    const {activeName, className, isLoadingRepositories, repositories, repositoriesError} = this.props;
     const {searchValue} = this.state;
 
     const filteredRepositories = this.getFilteredRepositories(repositories, searchValue);
 
     return (
       <Container className={className}>
-        <SearchContainer>
-          <Input
-            onChange={this.onChangeInput}
-            placeholder="Search for repositories"
-            type="text"
-          />
-        </SearchContainer>
+        <Loading isLoading={isLoadingRepositories}>
+          <SearchContainer>
+            <Input
+              onChange={this.onChangeInput}
+              placeholder="Search for repository"
+              type="search"
+            />
+          </SearchContainer>
 
-        <ListContainer>
-          <List>
-            {filteredRepositories.map((repository) => {
-              return (
-                <CardContainer key={repository.id}>
-                  <RepositoryCard {...repository} />
-                </CardContainer>
-              );
-            })}
-          </List>
-        </ListContainer>
+          <ListContainer>
+            <List>
+              {filteredRepositories.map((repository) => {
+                return (
+                  <CardContainer key={repository.id}>
+                    <RepositoryCard
+                      {...repository}
+                      isActive={activeName === repository.name}
+                      isButtonDisabled={!!activeName}
+                    />
+                  </CardContainer>
+                );
+              })}
+            </List>
+          </ListContainer>
+
+          <RepositoryReadmeDawer />
+        </Loading>
       </Container>
     );
   }

@@ -3,10 +3,22 @@ import axios from 'axios';
 
 export const USERS_URL = 'https://api.github.com/users/planttheidea';
 
+// export const getUserProfile = async () => {
+//   const response = await axios.get(USERS_URL);
+//
+//   return response.data;
+// };
+//
+// export const getUserRepositories = async () => {
+//   const response = await axios.get(`${USERS_URL}/repos`);
+//
+//   return response.data;
+// };
+
 export const getUserProfile = async () => {
-  // const response = await axios.get(USERS_URL);
-  //
-  // return response.data;
+  await new Promise((resolve) => {
+    setTimeout(resolve, 500);
+  });
 
   return await {
     login: 'planttheidea',
@@ -43,9 +55,9 @@ export const getUserProfile = async () => {
 };
 
 export const getUserRepositories = async () => {
-  // const response = await axios.get(`${USERS_URL}/repos`);
-  //
-  // return response.data;
+  await new Promise((resolve) => {
+    setTimeout(resolve, 500);
+  });
 
   return await [
     {

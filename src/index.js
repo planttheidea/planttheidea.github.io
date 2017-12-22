@@ -25,19 +25,23 @@ injectGlobal`
     background-color: #d8d3d2;
     color: #5d5d5d;
     font-family: sans-serif;
+    font-size: 14px;
   }
 `;
 /* eslint-enable*/
 
-const div = document.createElement('div');
+const appContainer = document.createElement('div');
+const drawerContainer = document.createElement('div');
 
-div.id = 'app-content';
+appContainer.id = 'app-content';
+drawerContainer.id = 'drawer';
+
+document.body.appendChild(appContainer);
+document.body.appendChild(drawerContainer);
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  div
+  appContainer
 );
-
-document.body.appendChild(div);

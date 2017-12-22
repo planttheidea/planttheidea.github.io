@@ -4,10 +4,12 @@ import reduxThunk from 'redux-thunk';
 
 // reducers
 import repositories from 'reducers/repositoriesReducer';
+import repository from 'reducers/repositoryReducer';
 import userProfile from 'reducers/userProfileReducer';
 
 const reducers = combineReducers({
   repositories,
+  repository,
   userProfile
 });
 

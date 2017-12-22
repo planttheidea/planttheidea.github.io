@@ -10,8 +10,7 @@ import * as userProfileActions from 'actions/userProfileActions';
 export const Container = styled.header`
   align-items: center;
   background-color: #fff;
-  border-bottom: 5px solid #de6e4b;
-  box-shadow: 0 10px 20px rgba(122, 101, 99, 0.19), 0 6px 6px rgba(122, 101, 99, 0.23);
+  border-bottom: 15px solid #de6e4b;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
