@@ -70,6 +70,12 @@ export const UserName = styled.div`
   font-size: 36px;
 `;
 
+export const HumanName = UserName.extend`
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 57px;
+`;
+
 export const createComponentDidMount = (instance) => {
   /**
    * @function componentDidMount
@@ -95,13 +101,14 @@ export const createComponentDidMount = (instance) => {
 export const mapStateToProps = ({userProfile: user}) => {
   const {isLoadingUserProfile, userProfile, userProfileError} = user;
 
-  const {avatar_url: avatarUrl, html_url: githubUrl, login} = userProfile;
+  const {avatar_url: avatarUrl, html_url: githubUrl, login, name} = userProfile;
 
   return {
     avatarUrl,
     githubUrl,
     isLoadingUserProfile,
     login,
+    name,
     userProfileError
   };
 };
@@ -119,6 +126,7 @@ class Header extends PureComponent {
     githubUrl: PropTypes.string,
     isLoadingUserProfile: PropTypes.bool.isRequired,
     login: PropTypes.string,
+    name: PropTypes.string,
     userProfileError: PropTypes.object
   };
 
@@ -126,7 +134,7 @@ class Header extends PureComponent {
   componentDidMount = createComponentDidMount(this);
 
   render() {
-    const {avatarUrl, className, githubUrl, login, userProfileError} = this.props;
+    const {avatarUrl, className, githubUrl, login, name, userProfileError} = this.props;
 
     if (userProfileError) {
       return (
@@ -148,7 +156,9 @@ class Header extends PureComponent {
         </ImageContainer>
 
         <Text hasImage={!!avatarUrl}>
-          <UserName>{login}</UserName>
+          <UserName>{login} repositories</UserName>
+
+          <HumanName>({name})</HumanName>
         </Text>
 
         <GithubLink

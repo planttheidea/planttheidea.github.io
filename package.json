@@ -1,13 +1,6 @@
 {
   "author": "tony.quetano@planttheidea.com",
-  "browserslist": [
-    "defaults",
-    "Explorer >= 9",
-    "Safari >= 6",
-    "Opera >= 15",
-    "iOS >= 8",
-    "Android >= 4"
-  ],
+  "browserslist": ["defaults", "Explorer >= 9", "Safari >= 6", "Opera >= 15", "iOS >= 8", "Android >= 4"],
   "bugs": {
     "url": "https://github.com/planttheidea/planttheidea.github.io/issues"
   },
@@ -73,6 +66,7 @@
     "dev": "NODE_ENV=development webpack-dev-server --colors --progress --config=webpack/webpack.config.dev.js",
     "lint": "NODE_ENV=test eslint src",
     "lint:fix": "NODE_ENV=test eslint src --fix",
+    "release": "npm run clean && npm run build",
     "start": "npm run dev"
   },
   "version": "1.0.0"

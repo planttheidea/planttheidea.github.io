@@ -9,7 +9,7 @@ module.exports = Object.assign({}, defaultConfig, {
   devtool: undefined,
 
   output: Object.assign({}, defaultConfig.output, {
-    filename: 'github.io.min.js'
+    filename: 'github-io.min.js'
   }),
 
   plugins: defaultConfig.plugins.concat([

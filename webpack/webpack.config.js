@@ -72,7 +72,7 @@ module.exports = {
   },
 
   output: {
-    filename: 'github.io.js',
+    filename: 'github-io.js',
     path: path.resolve(ROOT, 'dist')
   },
 
