@@ -133,7 +133,15 @@ export const ButtonContainer = styled.div`
 `;
 
 export const ReadmeIcon = styled(Readme)`
-  font-size: 22px;
+  font-size: 14px;
+
+  @media screen and (min-width: 600px) {
+    font-size: 17px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    font-size: 22px;
+  }
 `;
 
 export const createOnClickViewReadme = (instance) => {

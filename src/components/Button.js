@@ -12,7 +12,15 @@ const Button = styled.button`
   cursor: pointer;
   font-size: 14px;
   outline: 0;
-  padding: 10px 15px;
+  padding: 5px 8px;
+
+  @media screen and (min-width: 600px) {
+    padding: 8px 12px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    padding: 10px 15px;
+  }
 
   &:active,
   &:focus,

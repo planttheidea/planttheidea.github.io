@@ -44,7 +44,7 @@ export const GithubLink = styled.a`
   font-size: 18px;
   position: absolute;
   right: 5px;
-  top: -2px;
+  top: 0;
 
   @media screen and (min-width: 1000px) {
     font-size: 24px;
