@@ -1,0 +1,14 @@
+{
+  "plugins": ["transform-runtime", "styled-components"],
+  "presets": [
+    [
+      "env",
+      {
+        "loose": true,
+        "modules": false
+      }
+    ],
+    "react",
+    "stage-2"
+  ]
+}
