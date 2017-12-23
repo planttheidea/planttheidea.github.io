@@ -9,6 +9,7 @@ const Button = styled.button`
   border: 1px solid #ccc;
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  color: inherit;
   cursor: pointer;
   font-size: 14px;
   outline: 0;
