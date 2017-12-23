@@ -1,5 +1,5 @@
 // external dependencies
-import {format} from 'date-fns';
+import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import Repo from 'react-icons/lib/go/repo';

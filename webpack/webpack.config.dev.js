@@ -20,8 +20,6 @@ module.exports = Object.assign({}, defaultConfig, {
     }
   },
 
-  externals: undefined,
-
   module: Object.assign({}, defaultConfig.module, {
     rules: defaultConfig.module.rules.map((rule) => {
       if (rule.loader === 'eslint-loader') {
@@ -37,5 +35,10 @@ module.exports = Object.assign({}, defaultConfig, {
     })
   }),
 
-  plugins: [...defaultConfig.plugins, new HtmlWebpackPlugin()]
+  plugins: [
+    ...defaultConfig.plugins,
+    new HtmlWebpackPlugin({
+      template: 'test.html'
+    })
+  ]
 });

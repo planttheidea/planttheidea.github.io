@@ -22,6 +22,19 @@ import {setAxiosDefaults} from 'utils/axios';
 injectGlobal`
   ${styledNormalize};
 
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+      border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgb(122, 101, 99);
+  }
+
   * {
     box-sizing: border-box;
     font-family: inherit;
