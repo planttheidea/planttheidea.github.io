@@ -12,7 +12,18 @@ import orderBy from 'lodash/orderBy';
  * @returns {Array<Object>} the filtered list of repositories
  */
 export const getFilteredRepositories = (repositories, searchValue) => {
-  const orderedRepositories = orderBy(repositories, ['stargazers_count', 'updated_at'], ['desc', 'desc']);
+  const orderedRepositories = orderBy(
+    repositories,
+    [
+      ({stargazers_count}) => {
+        return stargazers_count;
+      },
+      ({updated_at}) => {
+        return updated_at;
+      }
+    ],
+    ['desc', 'desc']
+  );
 
   if (!searchValue) {
     return orderedRepositories;

@@ -1,6 +1,13 @@
 {
   "author": "tony.quetano@planttheidea.com",
-  "browserslist": ["defaults", "Explorer >= 9", "Safari >= 6", "Opera >= 15", "iOS >= 8", "Android >= 4"],
+  "browserslist": [
+    "defaults",
+    "Explorer >= 9",
+    "Safari >= 6",
+    "Opera >= 15",
+    "iOS >= 8",
+    "Android >= 4"
+  ],
   "bugs": {
     "url": "https://github.com/planttheidea/planttheidea.github.io/issues"
   },
@@ -46,6 +53,7 @@
     "eslint-loader": "^1.9.0",
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
+    "lodash-webpack-plugin": "^0.11.4",
     "optimize-js-plugin": "^0.0.4",
     "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",

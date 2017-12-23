@@ -67,13 +67,32 @@ export const Text = styled.div`
 
 export const UserName = styled.div`
   font-family: Aleo, serif;
-  font-size: 36px;
+  font-size: 18px;
+
+  @media screen and (min-width: 600px) {
+    font-size: 24px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    font-size: 30px;
+  }
 `;
 
-export const HumanName = UserName.extend`
-  font-size: 14px;
+export const HumanName = styled.div`
+  font-family: Aleo, serif;
+  font-size: 11px;
   font-weight: 300;
-  margin-left: 57px;
+  margin-left: 13px;
+
+  @media screen and (min-width: 600px) {
+    font-size: 14px;
+    margin-left: 23px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    font-size: 16px;
+    margin-left: 36px;
+  }
 `;
 
 export const createComponentDidMount = (instance) => {
