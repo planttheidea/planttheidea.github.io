@@ -1,6 +1,7 @@
 // external dependencies
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
+import Github from 'react-icons/lib/go/mark-github';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
@@ -27,7 +28,7 @@ export const ImageContainer = styled.div`
   flex-shrink: 0;
   height: ${IMAGE_SIZE};
   margin-left: auto;
-  width: ${IMAGE_SIZE};
+  width: ${IMAGE_SIZE};GithubLink
 `;
 
 export const Image = styled.img`
@@ -36,21 +37,46 @@ export const Image = styled.img`
   max-width: 100%;
 `;
 
+export const GithubLink = styled.a`
+  cursor: pointer;
+  font-size: 24px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+`;
+
+/**
+ * @function getTextMargin
+ *
+ * @description
+ * get the margin value for the Text component
+ *
+ * @param {boolean} hasImage is an image present or not
+ * @returns {string} the margin CSS value
+ */
+export const getTextMargin = ({hasImage}) => {
+  return hasImage ? '0 auto 0 15px' : '0 auto';
+};
+
 export const Text = styled.div`
   flex-basis: auto;
   flex-grow: 0;
   flex-shrink: 0;
-  margin: 0 auto 0 15px;
+  margin: ${getTextMargin};
 `;
 
-export const UserName = styled.a`
-  color: inherit;
-  font-family: serif;
+export const UserName = styled.div`
+  font-family: Aleo, serif;
   font-size: 36px;
-  text-decoration: none;
 `;
 
 export const createComponentDidMount = (instance) => {
+  /**
+   * @function componentDidMount
+   *
+   * @description
+   * on mount, get the user profile
+   */
   return () => {
     const {getUserProfile} = instance.props;
 
@@ -100,7 +126,17 @@ class Header extends PureComponent {
   componentDidMount = createComponentDidMount(this);
 
   render() {
-    const {avatarUrl, className, githubUrl, login} = this.props;
+    const {avatarUrl, className, githubUrl, login, userProfileError} = this.props;
+
+    if (userProfileError) {
+      return (
+        <Container className={className}>
+          <Text>
+            <UserName>repositories</UserName>
+          </Text>
+        </Container>
+      );
+    }
 
     return (
       <Container className={className}>
@@ -111,14 +147,17 @@ class Header extends PureComponent {
           />
         </ImageContainer>
 
-        <Text>
-          <UserName
-            href={githubUrl}
-            target="_blank"
-          >
-            {login}
-          </UserName>
+        <Text hasImage={!!avatarUrl}>
+          <UserName>{login}</UserName>
         </Text>
+
+        <GithubLink
+          href={githubUrl}
+          target="_blank"
+          title="View profile on github"
+        >
+          <Github />
+        </GithubLink>
       </Container>
     );
   }

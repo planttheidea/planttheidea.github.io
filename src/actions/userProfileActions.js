@@ -15,6 +15,14 @@ export const getUserProfileFail = createAction(ACTION_TYPES.GET_USER_PROFILE_FAI
 export const getUserProfilePending = createAction(ACTION_TYPES.GET_USER_PROFILE_PENDING);
 export const getUserProfileSuccess = createAction(ACTION_TYPES.GET_USER_PROFILE_SUCCESS);
 
+/**
+ * @function getUserProfile
+ *
+ * @description
+ * get the profile for the user
+ *
+ * @returns {function(function): Promise}
+ */
 export const getUserProfile = () => {
   return async (dispatch) => {
     dispatch(getUserProfilePending());

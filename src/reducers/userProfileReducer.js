@@ -10,6 +10,16 @@ export const INITIAL_STATE = {
   userProfileError: null
 };
 
+/**
+ * @function getUserProfileFail
+ *
+ * @description
+ * handle the GET_USER_PROFILE_FAIL action
+ *
+ * @param {Object} state the current state of the reducer
+ * @param {Error} payload the payload of the action
+ * @returns {Object} the updated state of the reducer
+ */
 const getUserProfileFail = (state, {payload: userProfileError}) => {
   return {
     ...state,
@@ -18,6 +28,15 @@ const getUserProfileFail = (state, {payload: userProfileError}) => {
   };
 };
 
+/**
+ * @function getUserProfilePending
+ *
+ * @description
+ * handle the GET_USER_PROFILE_PENDING action
+ *
+ * @param {Object} state the current state of the reducer
+ * @returns {Object} the updated state of the reducer
+ */
 const getUserProfilePending = (state) => {
   return {
     ...state,
@@ -25,6 +44,16 @@ const getUserProfilePending = (state) => {
   };
 };
 
+/**
+ * @function getUserProfileSuccess
+ *
+ * @description
+ * handle the GET_USER_PROFILE_SUCCESS action
+ *
+ * @param {Object} state the current state of the reducer
+ * @param {Object} payload the payload of the action
+ * @returns {Object} the updated state of the reducer
+ */
 const getUserProfileSuccess = (state, {payload: userProfile}) => {
   return {
     ...state,

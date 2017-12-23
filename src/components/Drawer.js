@@ -1,6 +1,6 @@
 // external dependencies
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {createPortal} from 'react-dom';
 import Close from 'react-icons/lib/md/close';
 import styled from 'styled-components';
@@ -8,6 +8,17 @@ import styled from 'styled-components';
 // components
 import Loading from 'components/Loading';
 
+export const ESCAPE_KEY = 27;
+
+/**
+ * @function getTransform
+ *
+ * @description
+ * get the transform value based on whether the drawer is active
+ *
+ * @param {boolean} isActive is the drawer open
+ * @returns {string} the transform CSS value
+ */
 export const getTransform = ({isActive}) => {
   return isActive ? 'none' : 'translateX(100%)';
 };
@@ -93,41 +104,100 @@ export const Contents = styled.div`
 
 let drawerContainer;
 
-const Drawer = ({children, header, onClose, isActive, isLoading}) => {
-  if (!drawerContainer) {
-    drawerContainer = document.querySelector('#drawer');
+export const createComponentWillMount = () => {
+  /**
+   * @function componentWillMount
+   *
+   * @description
+   * prior to mount, set the drawer container if it does not already exist
+   */
+  return () => {
+    if (!drawerContainer) {
+      drawerContainer = document.querySelector('#drawer');
+    }
+  };
+};
+
+export const createComponentDidUpdate = (instance) => {
+  /**
+   * @function componentDidUpdate
+   *
+   * @description
+   * on update, if the active status has changed then add or remove the event listener as appropriate
+   *
+   * @param {boolean} wasActive was the drawer previously active
+   */
+  return ({isActive: wasActive}) => {
+    const {isActive} = instance.props;
+
+    if (isActive && !wasActive) {
+      window.addEventListener('keyup', instance.closeOnEscapeKey);
+    } else if (!isActive && wasActive) {
+      window.removeEventListener('keyup', instance.closeOnEscapeKey);
+    }
+  };
+};
+
+export const createCloseOnEscapeKey = (instance) => {
+  /**
+   * @function closeOnEscapeKey
+   *
+   * @description
+   * if the key pressed is the ESC key, close the drawer
+   *
+   * @param {Event} event the keyup event
+   */
+  return (event) => {
+    const {onClose} = instance.props;
+
+    if (event.keyCode === ESCAPE_KEY) {
+      onClose(event);
+    }
+  };
+};
+
+class Drawer extends PureComponent {
+  static displayName = 'Drawer';
+
+  static propTypes = {
+    children: PropTypes.node,
+    header: PropTypes.string,
+    isActive: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool,
+    onClose: PropTypes.func.isRequired
+  };
+
+  // lifecycle methods
+  componentWillMount = createComponentWillMount(this);
+  componentDidUpdate = createComponentDidUpdate(this);
+
+  // instance methods
+  closeOnEscapeKey = createCloseOnEscapeKey(this);
+
+  render() {
+    const {children, header, onClose, isActive, isLoading} = this.props;
+
+    return createPortal(
+      <Container isActive={isActive}>
+        <Loading
+          isLoading={isLoading}
+          top="50%"
+        >
+          <Header>
+            <HeaderText>{header}</HeaderText>
+
+            <CloseButton
+              onClick={onClose}
+              role="button"
+            />
+          </Header>
+
+          <Contents>{children}</Contents>
+        </Loading>
+      </Container>,
+      drawerContainer
+    );
   }
-
-  return createPortal(
-    <Container isActive={isActive}>
-      <Loading
-        isLoading={isLoading}
-        top="50%"
-      >
-        <Header>
-          <HeaderText>{header}</HeaderText>
-
-          <CloseButton
-            onClick={onClose}
-            role="button"
-          />
-        </Header>
-
-        <Contents>{children}</Contents>
-      </Loading>
-    </Container>,
-    drawerContainer
-  );
-};
-
-Drawer.displayName = 'Drawer';
-
-Drawer.propTypes = {
-  children: PropTypes.node,
-  header: PropTypes.string,
-  isActive: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool,
-  onClose: PropTypes.func.isRequired
-};
+}
 
 export default Drawer;

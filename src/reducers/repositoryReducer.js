@@ -11,6 +11,15 @@ export const INITIAL_STATE = {
   readmeError: null
 };
 
+/**
+ * @function clearReadme
+ *
+ * @description
+ * clear the active readme
+ *
+ * @param {Object} state the current state of the reducer
+ * @returns {Object} the updated state of the reducer
+ */
 const clearReadme = (state) => {
   return {
     ...state,
@@ -19,6 +28,16 @@ const clearReadme = (state) => {
   };
 };
 
+/**
+ * @function getReadmeFail
+ *
+ * @description
+ * handle the GET_README_FAIL action
+ *
+ * @param {Object} state the current state of the reducer
+ * @param {Error} payload the payload of the action
+ * @returns {Object} the updated state of the reducer
+ */
 const getReadmeFail = (state, {payload: readmeError}) => {
   return {
     ...state,
@@ -27,6 +46,16 @@ const getReadmeFail = (state, {payload: readmeError}) => {
   };
 };
 
+/**
+ * @function getReadmePending
+ *
+ * @description
+ * handle the GET_README_PENDING action
+ *
+ * @param {Object} state the current state of the reducer
+ * @param {string} meta the meta of the action
+ * @returns {Object} the updated state of the reducer
+ */
 const getReadmePending = (state, {meta: projectName}) => {
   return {
     ...state,
@@ -35,6 +64,16 @@ const getReadmePending = (state, {meta: projectName}) => {
   };
 };
 
+/**
+ * @function getReadmeSuccess
+ *
+ * @description
+ * handle the GET_README_SUCCESS action
+ *
+ * @param {Object} state the current state of the reducer
+ * @param {Object} payload the payload of the action
+ * @returns {Object} the updated state of the reducer
+ */
 const getReadmeSuccess = (state, {payload: readme}) => {
   return {
     ...state,

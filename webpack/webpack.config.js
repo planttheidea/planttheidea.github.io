@@ -28,6 +28,45 @@ module.exports = {
         include: [path.resolve(ROOT, 'src'), /DEV_ONLY/],
         loader: 'babel-loader',
         test: /\.js$/
+      },
+      {
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }
+        ],
+        test: /\.css/
+      },
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'application/font-woff'
+        },
+        test: /.woff(2)?(?:\?.*|)$/
+      },
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'application/octet-stream'
+        },
+        test: /\.ttf(?:\?.*|)?$/
+      },
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'image/svg+xml'
+        },
+        test: /\.svg(?:\?.*|)?$/
+      },
+      {
+        loader: 'file-loader',
+        test: /\.eot(?:\?.*|)?$/
       }
     ]
   },

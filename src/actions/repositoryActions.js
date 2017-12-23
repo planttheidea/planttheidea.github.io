@@ -19,6 +19,15 @@ export const getReadmeFail = createAction(ACTION_TYPES.GET_README_FAIL, identity
 export const getReadmePending = createAction(ACTION_TYPES.GET_README_PENDING, identity, identitySecond);
 export const getReadmeSuccess = createAction(ACTION_TYPES.GET_README_SUCCESS, identity, identitySecond);
 
+/**
+ * @function getReadme
+ *
+ * @description
+ * get the README information for the given repository
+ *
+ * @param {string} repositoryName the name of the repository
+ * @returns {function(function): Promise}
+ */
 export const getReadme = (repositoryName) => {
   return async (dispatch) => {
     dispatch(getReadmePending(null, repositoryName));

@@ -10,9 +10,12 @@ const Button = styled.button`
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   cursor: pointer;
+  font-size: 14px;
   outline: 0;
   padding: 10px 15px;
 
+  &:active,
+  &:focus,
   &:hover {
     background-color: #f0f0f0;
   }

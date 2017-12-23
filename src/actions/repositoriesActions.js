@@ -15,6 +15,14 @@ export const getRepositoriesFail = createAction(ACTION_TYPES.GET_REPOSITORIES_FA
 export const getRepositoriesPending = createAction(ACTION_TYPES.GET_REPOSITORIES_PENDING);
 export const getRepositoriesSuccess = createAction(ACTION_TYPES.GET_REPOSITORIES_SUCCESS);
 
+/**
+ * @function getRepositories
+ *
+ * @description
+ * get the list of repositories for the user
+ *
+ * @returns{function(function): Promise}
+ */
 export const getRepositories = () => {
   return async (dispatch) => {
     dispatch(getRepositoriesPending());

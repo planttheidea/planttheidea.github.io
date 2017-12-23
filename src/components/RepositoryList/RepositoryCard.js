@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import Repo from 'react-icons/lib/go/repo';
 import RepoForked from 'react-icons/lib/go/repo-forked';
-import Readme from 'react-icons/lib/go/file-text';
+import Readme from 'react-icons/lib/ti/document-text';
 import {connect} from 'react-redux';
 import Star from 'react-icons/lib/go/star';
 import styled from 'styled-components';
@@ -21,12 +21,20 @@ import {MONTH_DAY_YEAR_HOUR_MINUTE_SECOND_FORMAT} from 'constants/date';
 // utils
 import {getDate} from 'utils/date';
 
+/**
+ * @function getBorderLeftColor
+ *
+ * @description
+ * get the border color for the card based
+ *
+ * @param {boolean} isActive is the card active
+ * @returns {string} the CSS border-left-color vaue
+ */
 export const getBorderLeftColor = ({isActive}) => {
   return isActive ? '#de6e4b' : '#7fd1b9';
 };
 
 export const Container = styled.div`
-  align-items: center;
   background-color: #fff;
   border-left: 5px solid ${getBorderLeftColor};
   border-radius: 4px;
@@ -34,22 +42,68 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  height: 100%;
   padding: 15px;
   transition: border-color 150ms ease-in-out;
 `;
 
 export const InfoContainer = styled.div`
+  display: flex;
   flex-basis: 0;
+  flex-direction: column;
   flex-grow: 1;
   flex-shrink: 1;
+  flex-wrap: nowrap;
   font-size: 24px;
+  height: 100%;
+  justify-content: space-between;
   min-width: 1px;
+`;
+
+export const NameContainer = styled.div`
+  align-items: center;
+  lign-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+`;
+
+export const RepoType = styled.div`
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
 `;
 
 export const Name = styled.div`
   display: inline-block;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
   margin-left: 5px;
+  min-width: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   vertical-align: middle;
+  white-space: nowrap;
+`;
+
+export const Description = styled.div`
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-size: 14px;
+  margin-top: 5px;
+  padding-right: 5px;
+`;
+
+export const DetailsContainer = styled.div`
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-top: auto;
 `;
 
 export const Detail = styled.div`
@@ -63,6 +117,7 @@ export const Detail = styled.div`
 
 export const Stars = Detail.extend`
   font-size: 16px;
+  margin-top: 15px;
 `;
 
 export const StarsCount = styled.span`
@@ -75,6 +130,10 @@ export const ButtonContainer = styled.div`
   flex-basis: auto;
   flex-grow: 0;
   flex-shrik: 0;
+`;
+
+export const ReadmeIcon = styled(Readme)`
+  font-size: 22px;
 `;
 
 export const createOnClickViewReadme = (instance) => {
@@ -101,12 +160,14 @@ class RepositoryCard extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     created_at: PropTypes.string.isRequired,
+    description: PropTypes.string,
     fork: PropTypes.bool,
     getReadme: PropTypes.func.isRequired,
     isActive: PropTypes.bool.isRequired,
     isButtonDisabled: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
     stargazers_count: PropTypes.number.isRequired,
+    tabIndex: PropTypes.number.isRequired,
     updated_at: PropTypes.string.isRequired
   };
 
@@ -114,7 +175,18 @@ class RepositoryCard extends PureComponent {
   onClickViewReadme = createOnClickViewReadme(this);
 
   render() {
-    const {className, created_at, fork, isActive, isButtonDisabled, name, stargazers_count, updated_at} = this.props;
+    const {
+      className,
+      created_at,
+      description,
+      fork,
+      isActive,
+      isButtonDisabled,
+      name,
+      stargazers_count,
+      tabIndex,
+      updated_at
+    } = this.props;
 
     return (
       <Container
@@ -122,29 +194,37 @@ class RepositoryCard extends PureComponent {
         isActive={isActive}
       >
         <InfoContainer>
-          {!fork && <Repo />}
+          <NameContainer>
+            <RepoType>
+              {!fork && <Repo />}
 
-          {fork && <RepoForked />}
+              {fork && <RepoForked />}
+            </RepoType>
 
-          <Name>{name}</Name>
+            <Name title={name}>{name}</Name>
+          </NameContainer>
 
-          <Stars>
-            <Star /> <StarsCount>{stargazers_count}</StarsCount>
-          </Stars>
+          <Description>{description}</Description>
 
-          <Detail>Created: {format(getDate(created_at), MONTH_DAY_YEAR_HOUR_MINUTE_SECOND_FORMAT)}</Detail>
+          <DetailsContainer>
+            <Stars>
+              <Star /> <StarsCount>{stargazers_count}</StarsCount>
+            </Stars>
 
-          <Detail>Last updated: {format(getDate(updated_at), MONTH_DAY_YEAR_HOUR_MINUTE_SECOND_FORMAT)}</Detail>
+            <Detail>Created: {format(getDate(created_at), MONTH_DAY_YEAR_HOUR_MINUTE_SECOND_FORMAT)}</Detail>
+
+            <Detail>Last updated: {format(getDate(updated_at), MONTH_DAY_YEAR_HOUR_MINUTE_SECOND_FORMAT)}</Detail>
+          </DetailsContainer>
         </InfoContainer>
 
         <ButtonContainer>
           <Button
             disabled={isButtonDisabled}
             onClick={this.onClickViewReadme}
+            tabIndex={tabIndex}
+            title="View README file"
           >
-            <Readme />
-
-            <span>View README</span>
+            <ReadmeIcon />
           </Button>
         </ButtonContainer>
       </Container>

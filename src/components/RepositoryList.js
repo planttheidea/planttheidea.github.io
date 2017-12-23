@@ -3,7 +3,6 @@ import debounce from 'lodash/debounce';
 import moize from 'moize';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
-import Loader from 'react-loader';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
@@ -11,6 +10,7 @@ import styled from 'styled-components';
 import * as repositoriesActions from 'actions/repositoriesActions';
 
 // components
+import ErrorNotification from 'components/ErrorNotification';
 import Loading from 'components/Loading';
 import RepositoryCard from 'components/RepositoryList/RepositoryCard';
 import RepositoryReadmeDawer from 'components/RepositoryList/RepositoryReadmeDrawer';
@@ -46,6 +46,7 @@ export const Input = styled.input`
 
   &:focus {
     border: 1px solid #7fb1d9;
+    box-shadow: 0 0 3px #7fb1d9;
   }
 `;
 
@@ -202,31 +203,37 @@ export class RepositoryList extends PureComponent {
     return (
       <Container className={className}>
         <Loading isLoading={isLoadingRepositories}>
-          <SearchContainer>
-            <Input
-              onChange={this.onChangeInput}
-              placeholder="Search for repository"
-              type="search"
-            />
-          </SearchContainer>
+          {repositoriesError && (
+            <ErrorNotification>Sorry, there was a problem loading the repositories from github.</ErrorNotification>
+          )}
 
-          <ListContainer>
-            <List>
-              {filteredRepositories.map((repository) => {
-                return (
-                  <CardContainer key={repository.id}>
-                    <RepositoryCard
-                      {...repository}
-                      isActive={activeName === repository.name}
-                      isButtonDisabled={!!activeName}
-                    />
-                  </CardContainer>
-                );
-              })}
-            </List>
-          </ListContainer>
-
-          <RepositoryReadmeDawer />
+          {!repositoriesError && [
+            <SearchContainer key="search-container">
+              <Input
+                autoFocus
+                onChange={this.onChangeInput}
+                placeholder="Search for repository"
+                type="search"
+              />
+            </SearchContainer>,
+            <ListContainer key="list-container">
+              <List>
+                {filteredRepositories.map((repository, index) => {
+                  return (
+                    <CardContainer key={repository.id}>
+                      <RepositoryCard
+                        {...repository}
+                        isActive={activeName === repository.name}
+                        isButtonDisabled={!!activeName}
+                        tabIndex={index + 1}
+                      />
+                    </CardContainer>
+                  );
+                })}
+              </List>
+            </ListContainer>,
+            <RepositoryReadmeDawer key="readme-drawer" />
+          ]}
         </Loading>
       </Container>
     );

@@ -10,6 +10,16 @@ export const INITIAL_STATE = {
   repositoriesError: null
 };
 
+/**
+ * @function getRepositoriesFail
+ *
+ * @description
+ * handle the GET_REPOSITORIES_FAIL action
+ *
+ * @param {Object} state the current state of the reducer
+ * @param {Error} payload the payload of the action
+ * @returns {Object} the updated state of the reducer
+ */
 const getRepositoriesFail = (state, {payload: repositoriesError}) => {
   return {
     ...state,
@@ -18,6 +28,15 @@ const getRepositoriesFail = (state, {payload: repositoriesError}) => {
   };
 };
 
+/**
+ * @function getRepositoriesPending
+ *
+ * @description
+ * handle the GET_REPOSITORIES_PENDING action
+ *
+ * @param {Object} state the current state of the reducer
+ * @returns {Object} the updated state of the reducer
+ */
 const getRepositoriesPending = (state) => {
   return {
     ...state,
@@ -25,6 +44,16 @@ const getRepositoriesPending = (state) => {
   };
 };
 
+/**
+ * @function getRepositoriesSuccess
+ *
+ * @description
+ * handle the GET_REPOSITORIES_SUCCESS action
+ *
+ * @param {Object} state the current state of the reducer
+ * @param {Array<Object>} payload the payload of the action
+ * @returns {Object} the updated state of the reducer
+ */
 const getRepositoriesSuccess = (state, {payload: repositories}) => {
   return {
     ...state,
