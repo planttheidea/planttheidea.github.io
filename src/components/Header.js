@@ -38,11 +38,17 @@ export const Image = styled.img`
 `;
 
 export const GithubLink = styled.a`
+  color: inherit;
   cursor: pointer;
-  font-size: 24px;
+  display: block;
+  font-size: 18px;
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 5px;
+  top: -2px;
+
+  @media screen and (min-width: 1000px) {
+    font-size: 24px;
+  }
 `;
 
 /**
