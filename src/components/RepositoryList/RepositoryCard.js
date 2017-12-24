@@ -3,7 +3,7 @@ import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import Repo from 'react-icons/lib/go/repo';
-import RepoForked from 'react-icons/lib/go/repo-forked';
+import Fork from 'react-icons/lib/go/repo-forked';
 import Readme from 'react-icons/lib/ti/document-text';
 import {connect} from 'react-redux';
 import Star from 'react-icons/lib/go/star';
@@ -115,14 +115,14 @@ export const Detail = styled.div`
   margin-top: 5px;
 `;
 
-export const Stars = Detail.extend`
+export const Counts = Detail.extend`
   font-size: 16px;
   margin-top: 15px;
 `;
 
-export const StarsCount = styled.span`
+export const Count = styled.span`
   display: inline-block;
-  margin-left: 5px;
+  margin: 0 15px 0 5px;
   vertical-align: middle;
 `;
 
@@ -170,6 +170,7 @@ class RepositoryCard extends PureComponent {
     created_at: PropTypes.string.isRequired,
     description: PropTypes.string,
     fork: PropTypes.bool,
+    forks_count: PropTypes.number.isRequired,
     getReadme: PropTypes.func.isRequired,
     isActive: PropTypes.bool.isRequired,
     isButtonDisabled: PropTypes.bool.isRequired,
@@ -188,6 +189,7 @@ class RepositoryCard extends PureComponent {
       created_at,
       description,
       fork,
+      forks_count,
       isActive,
       isButtonDisabled,
       name,
@@ -206,7 +208,7 @@ class RepositoryCard extends PureComponent {
             <RepoType>
               {!fork && <Repo />}
 
-              {fork && <RepoForked />}
+              {fork && <Fork />}
             </RepoType>
 
             <Name title={name}>{name}</Name>
@@ -215,9 +217,10 @@ class RepositoryCard extends PureComponent {
           <Description>{description}</Description>
 
           <DetailsContainer>
-            <Stars>
-              <Star /> <StarsCount>{stargazers_count}</StarsCount>
-            </Stars>
+            <Counts>
+              <Star /> <Count>{stargazers_count}</Count>
+              <Fork /> <Count>{forks_count}</Count>
+            </Counts>
 
             <Detail>Created: {format(getDate(created_at), MONTH_DAY_YEAR_HOUR_MINUTE_SECOND_FORMAT)}</Detail>
 
