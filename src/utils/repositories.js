@@ -13,7 +13,9 @@ import orderBy from 'lodash/orderBy';
  */
 export const getFilteredRepositories = (repositories, searchValue) => {
   const orderedRepositories = orderBy(
-    repositories,
+    repositories.filter(({private: isPrivate}) => {
+      return !isPrivate;
+    }),
     [
       ({stargazers_count}) => {
         return stargazers_count;
