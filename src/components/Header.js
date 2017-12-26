@@ -1,7 +1,7 @@
 // external dependencies
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
-import Github from 'react-icons/lib/go/mark-github';
+import GithubCorner from 'react-github-corner';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
@@ -35,20 +35,6 @@ export const Image = styled.img`
   display: block;
   max-height: auto;
   max-width: 100%;
-`;
-
-export const GithubLink = styled.a`
-  color: inherit;
-  cursor: pointer;
-  display: block;
-  font-size: 18px;
-  position: absolute;
-  right: 5px;
-  top: 0;
-
-  @media screen and (min-width: 1000px) {
-    font-size: 24px;
-  }
 `;
 
 /**
@@ -99,6 +85,12 @@ export const HumanName = styled.div`
     font-size: 16px;
     margin-left: 36px;
   }
+`;
+
+export const StyledGithubCorner = styled(GithubCorner)`
+  position: absolute;
+  right: 0;
+  top: 0;
 `;
 
 export const createComponentDidMount = (instance) => {
@@ -186,13 +178,13 @@ class Header extends PureComponent {
           <HumanName>({name})</HumanName>
         </Text>
 
-        <GithubLink
+        <StyledGithubCorner
+          ariaLabel="Open plantheidea's github"
+          bannerColor="#5d5d5d"
           href={githubUrl}
           target="_blank"
-          title="View profile on github"
-        >
-          <Github />
-        </GithubLink>
+          title="Open plantheidea's github"
+        />
       </Container>
     );
   }

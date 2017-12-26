@@ -2,7 +2,7 @@
 import moize from 'moize';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Github from 'react-icons/lib/go/logo-github';
+import GithubCorner from 'react-github-corner';
 import ReactMarkdown from 'react-markdown';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
@@ -22,9 +22,10 @@ export const SlimButton = styled(Button)`
   padding: 1px 15px 0;
 `;
 
-export const GithubLogo = styled(Github)`
-  font-size: 36px;
-  margin-top: 1px;
+export const StyledGithubCorner = styled(GithubCorner)`
+  position: absolute;
+  right: 0;
+  top: 0;
 `;
 
 export const createOnClickViewOnGithub = moize.simple((url) => {
@@ -132,13 +133,6 @@ export const RepositoryReadmeDawer = ({
       )}
 
       {!readmeError && [
-        <SlimButton
-          key="view-on-github-button"
-          onClick={createOnClickViewOnGithub(readmeUrl)}
-          title="View on github"
-        >
-          View on <GithubLogo />
-        </SlimButton>,
         markdown && (
           /* eslint-disable prettier */
           <ReactMarkdown
@@ -149,7 +143,15 @@ export const RepositoryReadmeDawer = ({
             transformImageUri={createTransformImageUri(masterUrl)}
           />
           /* eslint-enable */
-        )
+        ),
+        <StyledGithubCorner
+          ariaLabel="Open in github"
+          bannerColor="#5d5d5d"
+          href={readmeUrl}
+          key="github-corner"
+          target="_blank"
+          title="Open in github"
+        />
       ]}
     </Drawer>
   );
