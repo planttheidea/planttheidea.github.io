@@ -11,12 +11,12 @@ import * as userProfileActions from 'actions/userProfileActions';
 export const Container = styled.header`
   align-items: center;
   background-color: #fff;
-  border-bottom: 15px solid #de6e4b;
+  border-bottom: 5px solid #de6e4b;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
-  padding: 15px;
+  padding: 5px 15px 0;
   width: 100%;
 `;
 
@@ -37,24 +37,11 @@ export const Image = styled.img`
   max-width: 100%;
 `;
 
-/**
- * @function getTextMargin
- *
- * @description
- * get the margin value for the Text component
- *
- * @param {boolean} hasImage is an image present or not
- * @returns {string} the margin CSS value
- */
-export const getTextMargin = ({hasImage}) => {
-  return hasImage ? '0 auto 0 15px' : '0 auto';
-};
-
 export const Text = styled.div`
   flex-basis: auto;
   flex-grow: 0;
   flex-shrink: 0;
-  margin: ${getTextMargin};
+  margin-right: auto;
 `;
 
 export const UserName = styled.div`
