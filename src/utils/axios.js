@@ -1,9 +1,6 @@
 // external dependencies
 import axios from 'axios';
 
-// constants
-import {PERSONAL_ACCESS_TOKEN} from 'constants/axios';
-
 /**
  * @function getCachedData
  *
@@ -40,5 +37,4 @@ export const setAxiosDefaults = () => {
   axios.defaults.baseURL = 'https://api.github.com';
 
   axios.defaults.headers.common.Accept = 'application/vnd.github.v3+json';
-  axios.defaults.headers.common.Authorization = `token ${PERSONAL_ACCESS_TOKEN}`;
 };
