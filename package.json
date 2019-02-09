@@ -87,5 +87,5 @@
     "release": "npm run clean && npm run build",
     "start": "npm run dev"
   },
-  "version": "1.2.0"
+  "version": "1.2.1"
 }
