@@ -19,9 +19,7 @@ export const ESCAPE_KEY = 27;
  * @param {boolean} isActive is the drawer open
  * @returns {string} the transform CSS value
  */
-export const getTransform = ({isActive}) => {
-  return isActive ? 'none' : 'translateX(100%)';
-};
+export const getTransform = ({isActive}) => isActive ? 'none' : 'translateX(100%)';
 
 export const Container = styled.aside`
   background-color: #fff;
@@ -104,21 +102,21 @@ export const Contents = styled.div`
 
 let drawerContainer;
 
-export const createComponentWillMount = () => {
+export const createComponentWillMount = () => 
   /**
    * @function componentWillMount
    *
    * @description
    * prior to mount, set the drawer container if it does not already exist
    */
-  return () => {
+  () => {
     if (!drawerContainer) {
       drawerContainer = document.querySelector('#drawer');
     }
-  };
-};
+  }
+;
 
-export const createComponentDidUpdate = (instance) => {
+export const createComponentDidUpdate = (instance) => 
   /**
    * @function componentDidUpdate
    *
@@ -127,7 +125,7 @@ export const createComponentDidUpdate = (instance) => {
    *
    * @param {boolean} wasActive was the drawer previously active
    */
-  return ({isActive: wasActive}) => {
+  ({isActive: wasActive}) => {
     const {isActive} = instance.props;
 
     if (isActive && !wasActive) {
@@ -135,10 +133,10 @@ export const createComponentDidUpdate = (instance) => {
     } else if (!isActive && wasActive) {
       window.removeEventListener('keyup', instance.closeOnEscapeKey);
     }
-  };
-};
+  }
+;
 
-export const createCloseOnEscapeKey = (instance) => {
+export const createCloseOnEscapeKey = (instance) => 
   /**
    * @function closeOnEscapeKey
    *
@@ -147,14 +145,14 @@ export const createCloseOnEscapeKey = (instance) => {
    *
    * @param {Event} event the keyup event
    */
-  return (event) => {
+  (event) => {
     const {onClose} = instance.props;
 
     if (event.keyCode === ESCAPE_KEY) {
       onClose(event);
     }
-  };
-};
+  }
+;
 
 class Drawer extends PureComponent {
   static displayName = 'Drawer';
@@ -164,11 +162,11 @@ class Drawer extends PureComponent {
     header: PropTypes.string,
     isActive: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool,
-    onClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired,
   };
 
   // lifecycle methods
-  componentWillMount = createComponentWillMount(this);
+  UNSAFE_componentWillMount = createComponentWillMount(this);
   componentDidUpdate = createComponentDidUpdate(this);
 
   // instance methods

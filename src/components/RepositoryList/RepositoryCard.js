@@ -30,9 +30,7 @@ import {getDate} from 'utils/date';
  * @param {boolean} isActive is the card active
  * @returns {string} the CSS border-left-color vaue
  */
-export const getBorderLeftColor = ({isActive}) => {
-  return isActive ? '#de6e4b' : '#7fd1b9';
-};
+export const getBorderLeftColor = ({isActive}) => isActive ? '#de6e4b' : '#7fd1b9';
 
 export const Container = styled.div`
   background-color: #fff;
@@ -144,22 +142,22 @@ export const ReadmeIcon = styled(Readme)`
   }
 `;
 
-export const createOnClickViewReadme = (instance) => {
+export const createOnClickViewReadme = (instance) => 
   /**
    * @function onClickViewReadme
    *
    * @description
    * when the readme view is requested, call it with the project name
    */
-  return () => {
+  () => {
     const {getReadme, name} = instance.props;
 
     getReadme(name);
-  };
-};
+  }
+;
 
 const mapDispatchToProps = {
-  ...repositoryActions
+  ...repositoryActions,
 };
 
 class RepositoryCard extends PureComponent {
@@ -177,7 +175,7 @@ class RepositoryCard extends PureComponent {
     name: PropTypes.string.isRequired,
     stargazers_count: PropTypes.number.isRequired,
     tabIndex: PropTypes.number.isRequired,
-    updated_at: PropTypes.string.isRequired
+    updated_at: PropTypes.string.isRequired,
   };
 
   // instance methods
@@ -195,7 +193,7 @@ class RepositoryCard extends PureComponent {
       name,
       stargazers_count,
       tabIndex,
-      updated_at
+      updated_at,
     } = this.props;
 
     return (

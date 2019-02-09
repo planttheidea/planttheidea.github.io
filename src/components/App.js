@@ -29,15 +29,13 @@ export const StyledList = styled(RepositoryList)`
   z-index: 0;
 `;
 
-const App = () => {
-  return (
-    <Container>
-      <StyledHeader />
+const App = () => (
+  <Container>
+    <StyledHeader />
 
-      <StyledList />
-    </Container>
-  );
-};
+    <StyledList />
+  </Container>
+);
 
 App.displayName = 'App';
 

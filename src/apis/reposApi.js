@@ -15,9 +15,7 @@ export const REPO_URL = 'https://api.github.com/repos/planttheidea';
  * @param {string} repositoryName the name of the repository
  * @returns {Promise}
  */
-export const getRepositoryReadme = async (repositoryName) => {
-  return await getCachedData(
-    `${SESSION_STORAGE_KEY_PREFIX}:repositoryReadme.${repositoryName}`,
-    `${REPO_URL}/${repositoryName}/readme`
-  );
-};
+export const getRepositoryReadme = async (repositoryName) => await getCachedData(
+  `${SESSION_STORAGE_KEY_PREFIX}:repositoryReadme.${repositoryName}`,
+  `${REPO_URL}/${repositoryName}/readme`
+);

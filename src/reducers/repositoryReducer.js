@@ -8,7 +8,7 @@ export const INITIAL_STATE = {
   isLoadingReadme: false,
   projectName: null,
   readme: null,
-  readmeError: null
+  readmeError: null,
 };
 
 /**
@@ -20,13 +20,11 @@ export const INITIAL_STATE = {
  * @param {Object} state the current state of the reducer
  * @returns {Object} the updated state of the reducer
  */
-const clearReadme = (state) => {
-  return {
-    ...state,
-    projectName: null,
-    readme: null
-  };
-};
+const clearReadme = (state) => ({
+  ...state,
+  projectName: null,
+  readme: null,
+});
 
 /**
  * @function getReadmeFail
@@ -38,13 +36,11 @@ const clearReadme = (state) => {
  * @param {Error} payload the payload of the action
  * @returns {Object} the updated state of the reducer
  */
-const getReadmeFail = (state, {payload: readmeError}) => {
-  return {
-    ...state,
-    isLoadingReadme: false,
-    readmeError
-  };
-};
+const getReadmeFail = (state, {payload: readmeError}) => ({
+  ...state,
+  isLoadingReadme: false,
+  readmeError,
+});
 
 /**
  * @function getReadmePending
@@ -56,13 +52,11 @@ const getReadmeFail = (state, {payload: readmeError}) => {
  * @param {string} meta the meta of the action
  * @returns {Object} the updated state of the reducer
  */
-const getReadmePending = (state, {meta: projectName}) => {
-  return {
-    ...state,
-    isLoadingReadme: true,
-    projectName
-  };
-};
+const getReadmePending = (state, {meta: projectName}) => ({
+  ...state,
+  isLoadingReadme: true,
+  projectName,
+});
 
 /**
  * @function getReadmeSuccess
@@ -74,21 +68,19 @@ const getReadmePending = (state, {meta: projectName}) => {
  * @param {Object} payload the payload of the action
  * @returns {Object} the updated state of the reducer
  */
-const getReadmeSuccess = (state, {payload: readme}) => {
-  return {
-    ...state,
-    isLoadingReadme: false,
-    readme,
-    readmeError: null
-  };
-};
+const getReadmeSuccess = (state, {payload: readme}) => ({
+  ...state,
+  isLoadingReadme: false,
+  readme,
+  readmeError: null,
+});
 
 export default handleActions(
   {
     [ACTION_TYPES.CLEAR_README]: clearReadme,
     [ACTION_TYPES.GET_README_FAIL]: getReadmeFail,
     [ACTION_TYPES.GET_README_PENDING]: getReadmePending,
-    [ACTION_TYPES.GET_README_SUCCESS]: getReadmeSuccess
+    [ACTION_TYPES.GET_README_SUCCESS]: getReadmeSuccess,
   },
   INITIAL_STATE
 );

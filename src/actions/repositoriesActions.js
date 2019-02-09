@@ -8,7 +8,7 @@ import * as usersApi from 'apis/usersApi';
 export const ACTION_TYPES = createConstants('repositories', [
   'GET_REPOSITORIES_FAIL',
   'GET_REPOSITORIES_PENDING',
-  'GET_REPOSITORIES_SUCCESS'
+  'GET_REPOSITORIES_SUCCESS',
 ]);
 
 export const getRepositoriesFail = createAction(ACTION_TYPES.GET_REPOSITORIES_FAIL);
@@ -23,16 +23,14 @@ export const getRepositoriesSuccess = createAction(ACTION_TYPES.GET_REPOSITORIES
  *
  * @returns{function(function): Promise}
  */
-export const getRepositories = () => {
-  return async (dispatch) => {
-    dispatch(getRepositoriesPending());
+export const getRepositories = () => async (dispatch) => {
+  dispatch(getRepositoriesPending());
 
-    try {
-      const data = await usersApi.getUserRepositories();
+  try {
+    const data = await usersApi.getUserRepositories();
 
-      dispatch(getRepositoriesSuccess(data));
-    } catch (error) {
-      dispatch(getRepositoriesFail(error));
-    }
-  };
+    dispatch(getRepositoriesSuccess(data));
+  } catch (error) {
+    dispatch(getRepositoriesFail(error));
+  }
 };

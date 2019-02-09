@@ -14,9 +14,7 @@ export const USERS_URL = 'https://api.github.com/users/planttheidea';
  *
  * @returns {Promise}
  */
-export const getUserProfile = async () => {
-  return await getCachedData(`${SESSION_STORAGE_KEY_PREFIX}:userProfile`, USERS_URL);
-};
+export const getUserProfile = async () => await getCachedData(`${SESSION_STORAGE_KEY_PREFIX}:userProfile`, USERS_URL);
 
 /**
  * @function getUserRepositories
@@ -26,6 +24,4 @@ export const getUserProfile = async () => {
  *
  * @returns {Promise}
  */
-export const getUserRepositories = async () => {
-  return await getCachedData(`${SESSION_STORAGE_KEY_PREFIX}:userRepositories`, `${USERS_URL}/repos?per_page=1000`);
-};
+export const getUserRepositories = async () => await getCachedData(`${SESSION_STORAGE_KEY_PREFIX}:userRepositories`, `${USERS_URL}/repos?per_page=1000`);

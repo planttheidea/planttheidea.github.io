@@ -7,7 +7,7 @@ import {ACTION_TYPES} from 'actions/repositoriesActions';
 export const INITIAL_STATE = {
   isLoadingRepositories: false,
   repositories: [],
-  repositoriesError: null
+  repositoriesError: null,
 };
 
 /**
@@ -20,13 +20,11 @@ export const INITIAL_STATE = {
  * @param {Error} payload the payload of the action
  * @returns {Object} the updated state of the reducer
  */
-const getRepositoriesFail = (state, {payload: repositoriesError}) => {
-  return {
-    ...state,
-    isLoadingRepositories: false,
-    repositoriesError
-  };
-};
+const getRepositoriesFail = (state, {payload: repositoriesError}) => ({
+  ...state,
+  isLoadingRepositories: false,
+  repositoriesError,
+});
 
 /**
  * @function getRepositoriesPending
@@ -37,12 +35,10 @@ const getRepositoriesFail = (state, {payload: repositoriesError}) => {
  * @param {Object} state the current state of the reducer
  * @returns {Object} the updated state of the reducer
  */
-const getRepositoriesPending = (state) => {
-  return {
-    ...state,
-    isLoadingRepositories: true
-  };
-};
+const getRepositoriesPending = (state) => ({
+  ...state,
+  isLoadingRepositories: true,
+});
 
 /**
  * @function getRepositoriesSuccess
@@ -54,20 +50,18 @@ const getRepositoriesPending = (state) => {
  * @param {Array<Object>} payload the payload of the action
  * @returns {Object} the updated state of the reducer
  */
-const getRepositoriesSuccess = (state, {payload: repositories}) => {
-  return {
-    ...state,
-    isLoadingRepositories: false,
-    repositories,
-    repositoriesError: null
-  };
-};
+const getRepositoriesSuccess = (state, {payload: repositories}) => ({
+  ...state,
+  isLoadingRepositories: false,
+  repositories,
+  repositoriesError: null,
+});
 
 export default handleActions(
   {
     [ACTION_TYPES.GET_REPOSITORIES_FAIL]: getRepositoriesFail,
     [ACTION_TYPES.GET_REPOSITORIES_PENDING]: getRepositoriesPending,
-    [ACTION_TYPES.GET_REPOSITORIES_SUCCESS]: getRepositoriesSuccess
+    [ACTION_TYPES.GET_REPOSITORIES_SUCCESS]: getRepositoriesSuccess,
   },
   INITIAL_STATE
 );

@@ -8,7 +8,7 @@ import * as usersApi from 'apis/usersApi';
 export const ACTION_TYPES = createConstants('userProfile', [
   'GET_USER_PROFILE_FAIL',
   'GET_USER_PROFILE_PENDING',
-  'GET_USER_PROFILE_SUCCESS'
+  'GET_USER_PROFILE_SUCCESS',
 ]);
 
 export const getUserProfileFail = createAction(ACTION_TYPES.GET_USER_PROFILE_FAIL);
@@ -23,16 +23,14 @@ export const getUserProfileSuccess = createAction(ACTION_TYPES.GET_USER_PROFILE_
  *
  * @returns {function(function): Promise}
  */
-export const getUserProfile = () => {
-  return async (dispatch) => {
-    dispatch(getUserProfilePending());
+export const getUserProfile = () => async (dispatch) => {
+  dispatch(getUserProfilePending());
 
-    try {
-      const data = await usersApi.getUserProfile();
+  try {
+    const data = await usersApi.getUserProfile();
 
-      dispatch(getUserProfileSuccess(data));
-    } catch (error) {
-      dispatch(getUserProfileFail(error));
-    }
-  };
+    dispatch(getUserProfileSuccess(data));
+  } catch (error) {
+    dispatch(getUserProfileFail(error));
+  }
 };

@@ -31,18 +31,16 @@ export const Message = styled.div`
   min-width: 1px;
 `;
 
-const ErrorNotification = ({children}) => {
-  return (
-    <Container>
-      <ErrorIcon /> <Message>{children}</Message>
-    </Container>
-  );
-};
+const ErrorNotification = ({children}) => (
+  <Container>
+    <ErrorIcon /> <Message>{children}</Message>
+  </Container>
+);
 
 ErrorNotification.displayName = 'ErrorNotification';
 
 ErrorNotification.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default ErrorNotification;

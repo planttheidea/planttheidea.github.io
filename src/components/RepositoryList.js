@@ -95,27 +95,25 @@ export const CardContainer = styled.div`
  *
  * @returns {Object} the initial state of the component
  */
-export const getInitialState = () => {
-  return {
-    searchValue: ''
-  };
-};
+export const getInitialState = () => ({
+  searchValue: '',
+});
 
-export const createComponentDidMount = (instance) => {
+export const createComponentDidMount = (instance) => 
   /**
    * @function componentDidMount
    *
    * @description
    * on mount, get the list of repositories
    */
-  return () => {
+  () => {
     const {getRepositories} = instance.props;
 
     getRepositories();
-  };
-};
+  }
+;
 
-export const createDebounceOnChangeSearchValue = (instance) => {
+export const createDebounceOnChangeSearchValue = (instance) => 
   /**
    * @function debounceOnChangeSearchValue
    *
@@ -124,16 +122,14 @@ export const createDebounceOnChangeSearchValue = (instance) => {
    *
    * @param {string} searchValue the value to assign in state
    */
-  return debounce((searchValue) => {
-    instance.setState(() => {
-      return {
-        searchValue
-      };
-    });
-  }, DEBOUNCE_INPUT_TIMING);
-};
+  debounce((searchValue) => {
+    instance.setState(() => ({
+      searchValue,
+    }));
+  }, DEBOUNCE_INPUT_TIMING)
+;
 
-export const createOnChangeInput = (instance) => {
+export const createOnChangeInput = (instance) => 
   /**
    * @function onChangeInput
    *
@@ -142,10 +138,10 @@ export const createOnChangeInput = (instance) => {
    *
    * @param {Event} event the change event
    */
-  return (event) => {
+  (event) => {
     instance.debounceOnChangeSearchValue(event.currentTarget.value);
-  };
-};
+  }
+;
 
 /**
  * @function mapStateToProps
@@ -163,12 +159,12 @@ export const mapStateToProps = ({repositories: repos, repository}) => {
     activeName,
     isLoadingRepositories,
     repositories,
-    repositoriesError
+    repositoriesError,
   };
 };
 
 const mapDispatchToProps = {
-  ...repositoriesActions
+  ...repositoriesActions,
 };
 
 export class RepositoryList extends PureComponent {
@@ -180,7 +176,7 @@ export class RepositoryList extends PureComponent {
     getRepositories: PropTypes.func.isRequired,
     isLoadingRepositories: PropTypes.bool.isRequired,
     repositories: PropTypes.arrayOf(PropTypes.object).isRequired,
-    repositoriesError: PropTypes.object
+    repositoriesError: PropTypes.object,
   };
 
   // state
@@ -218,21 +214,19 @@ export class RepositoryList extends PureComponent {
             </SearchContainer>,
             <ListContainer key="list-container">
               <List>
-                {filteredRepositories.map((repository, index) => {
-                  return (
-                    <CardContainer key={repository.id}>
-                      <RepositoryCard
-                        {...repository}
-                        isActive={activeName === repository.name}
-                        isButtonDisabled={!!activeName}
-                        tabIndex={index + 1}
-                      />
-                    </CardContainer>
-                  );
-                })}
+                {filteredRepositories.map((repository, index) => (
+                  <CardContainer key={repository.id}>
+                    <RepositoryCard
+                      {...repository}
+                      isActive={activeName === repository.name}
+                      isButtonDisabled={!!activeName}
+                      tabIndex={index + 1}
+                    />
+                  </CardContainer>
+                ))}
               </List>
             </ListContainer>,
-            <RepositoryReadmeDawer key="readme-drawer" />
+            <RepositoryReadmeDawer key="readme-drawer" />,
           ]}
         </Loading>
       </Container>

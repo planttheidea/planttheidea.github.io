@@ -13,16 +13,10 @@ import orderBy from 'lodash/orderBy';
  */
 export const getFilteredRepositories = (repositories, searchValue) => {
   const orderedRepositories = orderBy(
-    repositories.filter(({private: isPrivate}) => {
-      return !isPrivate;
-    }),
+    repositories.filter(({private: isPrivate}) => !isPrivate),
     [
-      ({stargazers_count}) => {
-        return stargazers_count;
-      },
-      ({updated_at}) => {
-        return updated_at;
-      }
+      ({stargazers_count}) => stargazers_count,
+      ({updated_at}) => updated_at,
     ],
     ['desc', 'desc']
   );
@@ -33,7 +27,5 @@ export const getFilteredRepositories = (repositories, searchValue) => {
 
   const searchName = searchValue.toLowerCase();
 
-  return orderedRepositories.filter(({name}) => {
-    return name.toLowerCase().indexOf(searchName) === 0;
-  });
+  return orderedRepositories.filter(({name}) => name.toLowerCase().indexOf(searchName) === 0);
 };
