@@ -6,6 +6,8 @@ const webpack = require('webpack');
 
 const ROOT = path.resolve(__dirname, '..');
 
+const pkg = require('../package.json');
+
 module.exports = {
   devtool: '#source-map',
 
@@ -86,7 +88,7 @@ module.exports = {
   },
 
   output: {
-    filename: 'dist/github-io.min.js',
+    filename: `dist/github-io.min.js?version=${pkg.version}`,
   },
 
   plugins: [new webpack.EnvironmentPlugin(['NODE_ENV']), new LodashModuleReplacementPlugin()],
