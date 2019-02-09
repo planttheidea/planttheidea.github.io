@@ -89,7 +89,7 @@ module.exports = {
 
   output: {
     filename: `github-io.min.js?version=${pkg.version}`,
-    publicPath: path.resolve(ROOT, 'dist'),
+    publicPath: 'dist',
   },
 
   plugins: [new webpack.EnvironmentPlugin(['NODE_ENV']), new LodashModuleReplacementPlugin()],

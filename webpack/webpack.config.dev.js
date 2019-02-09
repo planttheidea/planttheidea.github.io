@@ -8,7 +8,7 @@ const pkg = require('../package.json');
 
 module.exports = Object.assign({}, defaultConfig, {
   devServer: {
-    contentBase: './dist',
+    contentBase: 'dist',
     inline: true,
     port: 3000,
     stats: {
@@ -36,6 +36,10 @@ module.exports = Object.assign({}, defaultConfig, {
       return rule;
     }),
   }),
+
+  output: {
+    filename: `dist/github-io.min.js?version=${pkg.version}`,
+  },
 
   plugins: [
     ...defaultConfig.plugins,
