@@ -55,7 +55,7 @@ module.exports = {
         options: {
           limit: 10000,
           mimetype: 'application/font-woff',
-          name: 'dist/[hash].[ext]',
+          name: '[hash].[ext]',
         },
         test: /.woff(2)?(?:\?.*|)$/,
       },
@@ -64,7 +64,7 @@ module.exports = {
         options: {
           limit: 10000,
           mimetype: 'application/octet-stream',
-          name: 'dist/[hash].[ext]',
+          name: '[hash].[ext]',
         },
         test: /\.ttf(?:\?.*|)?$/,
       },
@@ -73,14 +73,14 @@ module.exports = {
         options: {
           limit: 10000,
           mimetype: 'image/svg+xml',
-          name: 'dist/[hash].[ext]',
+          name: '[hash].[ext]',
         },
         test: /\.svg(?:\?.*|)?$/,
       },
       {
         loader: 'file-loader',
         options: {
-          name: 'dist/[hash].[ext]',
+          name: '[hash].[ext]',
         },
         test: /\.eot(?:\?.*|)?$/,
       },
@@ -88,7 +88,8 @@ module.exports = {
   },
 
   output: {
-    filename: `dist/github-io.min.js?version=${pkg.version}`,
+    filename: `github-io.min.js?version=${pkg.version}`,
+    publicPath: path.resolve(ROOT, 'dist'),
   },
 
   plugins: [new webpack.EnvironmentPlugin(['NODE_ENV']), new LodashModuleReplacementPlugin()],
