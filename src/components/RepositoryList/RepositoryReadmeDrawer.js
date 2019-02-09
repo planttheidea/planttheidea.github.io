@@ -28,22 +28,22 @@ export const StyledGithubCorner = styled(GithubCorner)`
   top: 0;
 `;
 
-export const createOnClickViewOnGithub = moize.simple((url) => {
+export const createOnClickViewOnGithub = moize.simple((url) => 
   /**
    * @function createOnClickViewOnGithub
    *
    * @description
    * when the view on github button is clicked, open a new tab with the location
    */
-  return () => {
+  () => {
     const newTab = window.open(url, '_blank');
 
     newTab.referrer = null;
     newTab.focus();
-  };
-});
+  }
+);
 
-export const createTransformImageUri = moize.simple((url) => {
+export const createTransformImageUri = moize.simple((url) => 
   /**
    * @function transformImageUri
    *
@@ -53,10 +53,8 @@ export const createTransformImageUri = moize.simple((url) => {
    * @param {string} uri the relative uri location of the image
    * @returns {string} the absolute url location of the image
    */
-  return (uri) => {
-    return `${url}/${uri}?raw=true`;
-  };
-});
+  (uri) => `${url}/${uri}?raw=true`
+);
 
 /**
  * @function determineAllowNode
@@ -71,16 +69,10 @@ export const determineAllowNode = (node) => {
   const {children, type, value} = node;
 
   return (
-    value !== 'Table of contents' &&
-    !(
-      type === 'list' &&
-      children.some(({children: listItem}) => {
-        return listItem.some(({children: paragraph}) => {
-          return paragraph.some(({url}) => {
-            return url && url[0] === '#';
-          });
-        });
-      })
+    value !== 'Table of contents'
+    && !(
+      type === 'list'
+      && children.some(({children: listItem}) => listItem.some(({children: paragraph}) => paragraph.some(({url}) => url && url[0] === '#')))
     )
   );
 };
@@ -104,12 +96,12 @@ export const mapStateToProps = ({repository}) => {
     masterUrl: readmeUrl ? readmeUrl.replace(`/${readme.name}`, '') : null,
     projectName,
     readmeError,
-    readmeUrl
+    readmeUrl,
   };
 };
 
 const mapDispatchToProps = {
-  ...repositoryActions
+  ...repositoryActions,
 };
 
 export const RepositoryReadmeDawer = ({
@@ -119,43 +111,41 @@ export const RepositoryReadmeDawer = ({
   masterUrl,
   projectName,
   readmeError,
-  readmeUrl
-}) => {
-  return (
-    <Drawer
-      header={projectName}
-      isActive={!!projectName}
-      isLoading={isLoadingReadme}
-      onClose={clearReadme}
-    >
-      {readmeError && (
-        <ErrorNotification>Sorry, there was an error loading the README file from github.</ErrorNotification>
-      )}
+  readmeUrl,
+}) => (
+  <Drawer
+    header={projectName}
+    isActive={!!projectName}
+    isLoading={isLoadingReadme}
+    onClose={clearReadme}
+  >
+    {readmeError && (
+      <ErrorNotification>Sorry, there was an error loading the README file from github.</ErrorNotification>
+    )}
 
-      {!readmeError && [
-        markdown && (
-          /* eslint-disable prettier */
-          <ReactMarkdown
-            allowNode={determineAllowNode}
-            escapeHtml={false}
-            key="readme-markdown"
-            source={markdown}
-            transformImageUri={createTransformImageUri(masterUrl)}
-          />
-          /* eslint-enable */
-        ),
-        <StyledGithubCorner
-          ariaLabel="Open in github"
-          bannerColor="#5d5d5d"
-          href={readmeUrl}
-          key="github-corner"
-          target="_blank"
-          title="Open in github"
+    {!readmeError && [
+      markdown && (
+      /* eslint-disable prettier */
+        <ReactMarkdown
+          allowNode={determineAllowNode}
+          escapeHtml={false}
+          key="readme-markdown"
+          source={markdown}
+          transformImageUri={createTransformImageUri(masterUrl)}
         />
-      ]}
-    </Drawer>
-  );
-};
+      /* eslint-enable */
+      ),
+      <StyledGithubCorner
+        ariaLabel="Open in github"
+        bannerColor="#5d5d5d"
+        href={readmeUrl}
+        key="github-corner"
+        target="_blank"
+        title="Open in github"
+      />,
+    ]}
+  </Drawer>
+);
 
 RepositoryReadmeDawer.displayName = 'RepositoryReadmeDawer';
 
@@ -166,7 +156,7 @@ RepositoryReadmeDawer.propTypes = {
   masterUrl: PropTypes.string,
   projectName: PropTypes.string,
   readmeError: PropTypes.object,
-  readmeUrl: PropTypes.string
+  readmeUrl: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepositoryReadmeDawer);

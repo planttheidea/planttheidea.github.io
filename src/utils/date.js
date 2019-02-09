@@ -10,6 +10,4 @@ import moize from 'moize';
  * @param {string} dateString the date as an ISO string
  * @returns {Date} the date object
  */
-export const getDate = moize.maxSize(100)((dateString) => {
-  return new Date(dateString);
-});
+export const getDate = moize.maxSize(100)((dateString) => new Date(dateString));

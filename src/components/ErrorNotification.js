@@ -1,7 +1,7 @@
 // external dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-import Error from 'react-icons/lib/md/error-outline';
+import {MdError as Error} from 'react-icons/md';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -31,18 +31,16 @@ export const Message = styled.div`
   min-width: 1px;
 `;
 
-const ErrorNotification = ({children}) => {
-  return (
-    <Container>
-      <ErrorIcon /> <Message>{children}</Message>
-    </Container>
-  );
-};
+const ErrorNotification = ({children}) => (
+  <Container>
+    <ErrorIcon /> <Message>{children}</Message>
+  </Container>
+);
 
 ErrorNotification.displayName = 'ErrorNotification';
 
 ErrorNotification.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default ErrorNotification;

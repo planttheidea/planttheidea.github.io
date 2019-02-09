@@ -80,19 +80,19 @@ export const StyledGithubCorner = styled(GithubCorner)`
   top: 0;
 `;
 
-export const createComponentDidMount = (instance) => {
+export const createComponentDidMount = (instance) => 
   /**
    * @function componentDidMount
    *
    * @description
    * on mount, get the user profile
    */
-  return () => {
+  () => {
     const {getUserProfile} = instance.props;
 
     getUserProfile();
-  };
-};
+  }
+;
 
 /**
  * @function mapStateToProps
@@ -113,12 +113,12 @@ export const mapStateToProps = ({userProfile: user}) => {
     isLoadingUserProfile,
     login,
     name,
-    userProfileError
+    userProfileError,
   };
 };
 
 const mapDispatchToProps = {
-  ...userProfileActions
+  ...userProfileActions,
 };
 
 class Header extends PureComponent {
@@ -131,7 +131,7 @@ class Header extends PureComponent {
     isLoadingUserProfile: PropTypes.bool.isRequired,
     login: PropTypes.string,
     name: PropTypes.string,
-    userProfileError: PropTypes.object
+    userProfileError: PropTypes.object,
   };
 
   // lifecycle methods

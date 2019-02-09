@@ -2,8 +2,6 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
-import {injectGlobal} from 'styled-components';
-import styledNormalize from 'styled-normalize';
 
 // app
 import App from 'components/App';
@@ -17,38 +15,6 @@ import store from './store';
 
 // utils
 import {setAxiosDefaults} from 'utils/axios';
-
-/* eslint-disable no-unused-expressions */
-injectGlobal`
-  ${styledNormalize};
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-      border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      box-shadow: inset 0 0 6px rgb(122, 101, 99);
-  }
-
-  * {
-    box-sizing: border-box;
-    font-family: inherit;
-    position: relative;
-  }
-
-  body {
-    background-color: #d8d3d2;
-    color: #5d5d5d;
-    font-family: 'Cooper Hewitt', sans-serif;
-    font-size: 14px;
-  }
-`;
-/* eslint-enable*/
 
 setAxiosDefaults();
 

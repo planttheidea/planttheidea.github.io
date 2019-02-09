@@ -1,6 +1,5 @@
 // external dependencies
 import PropTypes from 'prop-types';
-import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -44,11 +43,11 @@ const Button = styled.button`
 Button.displayName = 'Button';
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['button', 'reset', 'submit'])
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
 };
 
 Button.defaultProps = {
-  type: 'button'
+  type: 'button',
 };
 
 export default Button;

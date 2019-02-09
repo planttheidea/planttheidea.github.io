@@ -1,5 +1,12 @@
+/* eslint-disable rapid7/no-trailing-underscore */
+
 // external dependencies
-import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
+import {
+  applyMiddleware,
+  combineReducers,
+  compose,
+  createStore,
+} from 'redux';
 import reduxThunk from 'redux-thunk';
 
 // reducers
@@ -10,7 +17,7 @@ import userProfile from 'reducers/userProfileReducer';
 const reducers = combineReducers({
   repositories,
   repository,
-  userProfile
+  userProfile,
 });
 
 const middleware = applyMiddleware(reduxThunk);

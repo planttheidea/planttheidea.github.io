@@ -6,6 +6,8 @@ const webpack = require('webpack');
 
 const ROOT = path.resolve(__dirname, '..');
 
+const pkg = require('../package.json');
+
 module.exports = {
   devtool: '#source-map',
 
@@ -13,83 +15,85 @@ module.exports = {
 
   externals: {
     react: 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
   },
+
+  mode: 'development',
 
   module: {
     rules: [
       {
         enforce: 'pre',
         include: [path.resolve(ROOT, 'src')],
+        loader: 'eslint-loader',
         options: {
           emitError: true,
           failOnError: true,
           failOnWarning: true,
-          formatter: require('eslint-friendly-formatter')
+          formatter: require('eslint-friendly-formatter'),
         },
-        loader: 'eslint-loader',
-        test: /\.js$/
+        test: /\.js$/,
       },
       {
         include: [path.resolve(ROOT, 'src'), /DEV_ONLY/],
         loader: 'babel-loader',
-        test: /\.js$/
+        test: /\.js$/,
       },
       {
+        test: /\.css/,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
           },
           {
-            loader: 'css-loader'
-          }
+            loader: 'css-loader',
+          },
         ],
-        test: /\.css/
       },
       {
         loader: 'url-loader',
         options: {
           limit: 10000,
           mimetype: 'application/font-woff',
-          name: 'dist/[hash].[ext]'
+          name: 'dist/[hash].[ext]',
         },
-        test: /.woff(2)?(?:\?.*|)$/
+        test: /.woff(2)?(?:\?.*|)$/,
       },
       {
         loader: 'url-loader',
         options: {
           limit: 10000,
           mimetype: 'application/octet-stream',
-          name: 'dist/[hash].[ext]'
+          name: 'dist/[hash].[ext]',
         },
-        test: /\.ttf(?:\?.*|)?$/
+        test: /\.ttf(?:\?.*|)?$/,
       },
       {
         loader: 'url-loader',
         options: {
           limit: 10000,
           mimetype: 'image/svg+xml',
-          name: 'dist/[hash].[ext]'
+          name: 'dist/[hash].[ext]',
         },
-        test: /\.svg(?:\?.*|)?$/
+        test: /\.svg(?:\?.*|)?$/,
       },
       {
         loader: 'file-loader',
         options: {
-          name: 'dist/[hash].[ext]'
+          name: 'dist/[hash].[ext]',
         },
-        test: /\.eot(?:\?.*|)?$/
-      }
-    ]
+        test: /\.eot(?:\?.*|)?$/,
+      },
+    ],
   },
 
   output: {
-    filename: 'dist/github-io.min.js'
+    filename: `dist/github-io.min.js?version=${pkg.version}`,
   },
 
   plugins: [new webpack.EnvironmentPlugin(['NODE_ENV']), new LodashModuleReplacementPlugin()],
 
   resolve: {
-    modules: [path.resolve(ROOT, 'src'), 'node_modules']
-  }
+    modules: [path.resolve(ROOT, 'src'), 'node_modules'],
+  },
 };
