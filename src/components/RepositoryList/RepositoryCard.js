@@ -2,11 +2,13 @@
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
-import Repo from 'react-icons/lib/go/repo';
-import Fork from 'react-icons/lib/go/repo-forked';
-import Readme from 'react-icons/lib/ti/document-text';
+import {
+  GoRepoForked as Fork,
+  GoRepo as Repo,
+  GoStar as Star,
+} from 'react-icons/go';
+import {TiDocumentText as Readme} from 'react-icons/ti';
 import {connect} from 'react-redux';
-import Star from 'react-icons/lib/go/star';
 import styled from 'styled-components';
 
 // actions
@@ -30,7 +32,7 @@ import {getDate} from 'utils/date';
  * @param {boolean} isActive is the card active
  * @returns {string} the CSS border-left-color vaue
  */
-export const getBorderLeftColor = ({isActive}) => isActive ? '#de6e4b' : '#7fd1b9';
+export const getBorderLeftColor = ({isActive}) => (isActive ? '#de6e4b' : '#7fd1b9');
 
 export const Container = styled.div`
   background-color: #fff;
@@ -113,7 +115,7 @@ export const Detail = styled.div`
   margin-top: 5px;
 `;
 
-export const Counts = Detail.extend`
+export const Counts = styled(Detail)`
   font-size: 16px;
   margin-top: 15px;
 `;
@@ -142,7 +144,7 @@ export const ReadmeIcon = styled(Readme)`
   }
 `;
 
-export const createOnClickViewReadme = (instance) => 
+export const createOnClickViewReadme = (instance) =>
   /**
    * @function onClickViewReadme
    *
@@ -153,8 +155,7 @@ export const createOnClickViewReadme = (instance) =>
     const {getReadme, name} = instance.props;
 
     getReadme(name);
-  }
-;
+  };
 
 const mapDispatchToProps = {
   ...repositoryActions,
@@ -241,4 +242,7 @@ class RepositoryCard extends PureComponent {
   }
 }
 
-export default connect(null, mapDispatchToProps)(RepositoryCard);
+export default connect(
+  null,
+  mapDispatchToProps
+)(RepositoryCard);

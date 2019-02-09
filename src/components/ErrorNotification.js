@@ -1,7 +1,7 @@
 // external dependencies
 import PropTypes from 'prop-types';
 import React from 'react';
-import Error from 'react-icons/lib/md/error-outline';
+import {MdError as Error} from 'react-icons/md';
 import styled from 'styled-components';
 
 export const Container = styled.div`

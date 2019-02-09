@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import {createPortal} from 'react-dom';
-import Close from 'react-icons/lib/md/close';
+import {MdClose as Close} from 'react-icons/md';
 import styled from 'styled-components';
 
 // components
@@ -19,7 +19,7 @@ export const ESCAPE_KEY = 27;
  * @param {boolean} isActive is the drawer open
  * @returns {string} the transform CSS value
  */
-export const getTransform = ({isActive}) => isActive ? 'none' : 'translateX(100%)';
+export const getTransform = ({isActive}) => (isActive ? 'none' : 'translateX(100%)');
 
 export const Container = styled.aside`
   background-color: #fff;
@@ -102,7 +102,7 @@ export const Contents = styled.div`
 
 let drawerContainer;
 
-export const createComponentWillMount = () => 
+export const createComponentWillMount = () =>
   /**
    * @function componentWillMount
    *
@@ -113,10 +113,9 @@ export const createComponentWillMount = () =>
     if (!drawerContainer) {
       drawerContainer = document.querySelector('#drawer');
     }
-  }
-;
+  };
 
-export const createComponentDidUpdate = (instance) => 
+export const createComponentDidUpdate = (instance) =>
   /**
    * @function componentDidUpdate
    *
@@ -133,10 +132,9 @@ export const createComponentDidUpdate = (instance) =>
     } else if (!isActive && wasActive) {
       window.removeEventListener('keyup', instance.closeOnEscapeKey);
     }
-  }
-;
+  };
 
-export const createCloseOnEscapeKey = (instance) => 
+export const createCloseOnEscapeKey = (instance) =>
   /**
    * @function closeOnEscapeKey
    *
@@ -151,8 +149,7 @@ export const createCloseOnEscapeKey = (instance) =>
     if (event.keyCode === ESCAPE_KEY) {
       onClose(event);
     }
-  }
-;
+  };
 
 class Drawer extends PureComponent {
   static displayName = 'Drawer';
